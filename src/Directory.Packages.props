@@ -1,0 +1,24 @@
+<Project>
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    </PropertyGroup>
+    <ItemGroup>
+        <!-- 身份认证相关 -->
+        <PackageVersion Include="Microsoft.AspNetCore.Identity" Version="2.3.1"/>
+        <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.1"/>
+        <!-- EF Core 统一 10.0.1 -->
+        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.1"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.1"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.1"/>
+        <!-- Npgsql -->
+        <PackageVersion Include="Npgsql" Version="10.0.1"/>
+        <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0"/>
+        <!-- 其它公共包 -->
+        <!-- <PackageVersion Include="Mapster" Version="7.4.0"/> -->
+        <!-- <PackageVersion Include="Scrutor" Version="6.1.0"/> -->
+        <!-- <PackageVersion Include="MediatR" Version="12.5.0"/> -->
+        <!-- <PackageVersion Include="Swashbuckle.AspNetCore" Version="9.0.5"/> -->
+        <PackageVersion Include="FluentValidation" Version="12.0.0"/>
+        <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0"/>
+    </ItemGroup>
+</Project>
