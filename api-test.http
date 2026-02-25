@@ -1,0 +1,13 @@
+@baseUrl=https://localhost:5149
+
+
+###
+GET {{baseUrl}}/api/test
+
+
+
+### test oada
+GET {{baseUrl}}/odata/cabins
+Content-Type: application/json
+
+

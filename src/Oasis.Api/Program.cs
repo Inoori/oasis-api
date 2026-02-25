@@ -20,7 +20,6 @@ builder.Services.AddProblemDetails();
 // 添加控制器服务并启用 OData支持
 builder.Services.AddControllers().AddODataService();
 
-
 // 身份认证服务
 builder.Services.AddIdentityServices();
 
@@ -46,7 +45,7 @@ app.UseAuthorization();
 // map identity api endpoints
 app.MapControllers();
 
-app.MapIdentityApi<IdentityUser>();
+// app.MapIdentityApi<IdentityUser>();
 
 //使用全局异常处理中间件
 app.UseMiddleware<ExceptionHandler>();

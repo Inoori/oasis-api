@@ -21,7 +21,7 @@ public static partial class ServiceExtension
             services.AddDbContext<OasisDbContext>(options =>
             {
                 //使用 Npgsql 作为数据库提供程序
-                options.UseNpgsql(configuration.GetConnectionString("oasis-db"),
+                options.UseNpgsql(configuration.GetConnectionString("oasis_db"),
                     sql => sql.MigrationsAssembly("Oasis.Infrastructure")); // 指定迁移程序集
             });
 

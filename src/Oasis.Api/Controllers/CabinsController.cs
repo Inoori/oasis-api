@@ -9,9 +9,9 @@ namespace Oasis.Api.Controllers;
 
 
 [ApiController]
-[Route("odata/[controller]")]
-[Authorize]
-public class CabinController(OasisDbContext dbContext) : ODataController
+[Route("cabins")]
+// [Authorize]
+public class CabinsController(OasisDbContext dbContext) : ODataController
 {
     [HttpGet]
     [EnableQuery]  // 启用 OData 查询选项
@@ -21,7 +21,6 @@ public class CabinController(OasisDbContext dbContext) : ODataController
     }
 
     [HttpGet("{id:int}")]
-    [EnableQuery]
     public async Task<IActionResult> GetById(int id)
     {
         var result = dbContext.Cabins.Where(c => c.Id == id);
