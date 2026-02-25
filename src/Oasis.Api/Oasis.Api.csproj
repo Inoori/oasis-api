@@ -13,4 +13,10 @@
         </PackageReference>
     </ItemGroup>
 
+
+    <ItemGroup>
+        <ProjectReference Include="..\Oasis.Core\Oasis.Core.csproj"/>
+        <ProjectReference Include="..\Oasis.Infrastructure\Oasis.Infrastructure.csproj"/>
+    </ItemGroup>
+
 </Project>
