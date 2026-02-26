@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Cryptography;
 
 namespace Oasis.Infrastructure.Persistence;
 
@@ -11,6 +12,17 @@ public class OasisDbContext(DbContextOptions<OasisDbContext> options) : Identity
     /// Cabins DbSet
     /// </summary>
     public DbSet<Cabin> Cabins { get; set; }
+
+    /// <summary>
+    /// Bookings DbSet
+    /// </summary>
+    public DbSet<Booking> Bookings { get; set; }
+
+
+    /// <summary>
+    /// Guests DbSet
+    /// </summary>
+    public DbSet<Guest> Guests { get; set; }
 
 
     /// <summary>
