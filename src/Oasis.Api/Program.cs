@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Oasis.Api.Middleware;
-using Oasis.Core;
 using Oasis.Infrastructure;
+using Oasis.Application;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +24,7 @@ builder.Services.AddControllers().AddODataService();
 builder.Services.AddIdentityServices();
 
 builder.Services.AddApiServices()
-.AddCoreServices()
+.AddApplication()
 .AddInfrastructureServices(builder.Configuration);
 
 

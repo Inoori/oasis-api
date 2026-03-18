@@ -3,7 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
+using Oasis.Application.Interfaces;
 using Oasis.Infrastructure.Persistence;
+using Oasis.Infrastructure.Services;
 
 namespace Oasis.Infrastructure;
 
@@ -24,6 +26,13 @@ public static partial class ServiceExtension
                 options.UseNpgsql(configuration.GetConnectionString("oasis_db"),
                     sql => sql.MigrationsAssembly("Oasis.Infrastructure")); // 指定迁移程序集
             });
+
+
+
+            services.AddScoped(typeof(IBatchOperationHandler<,>), typeof(BatchOperationHandler<,>))
+                            .AddScoped<ICabinService, CabinService>()
+                            .AddScoped<IGuestService, GuestService>()
+                            .AddScoped<IBookingService, BookingService>();
 
             return services;
         }

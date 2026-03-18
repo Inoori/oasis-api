@@ -1,21 +1,27 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Mapster;
+using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 
-
-namespace Oasis.Core;
+namespace Oasis.Application;
 
 public static partial class ServiceExtension
 {
+
     extension(IServiceCollection services)
     {
-
         /// <summary>
-        /// 添加 Core 相关的依赖注入服务
+        /// 注册应用层的服务
         /// </summary>
         /// <returns></returns>
-        public IServiceCollection AddCoreServices()
+        public IServiceCollection AddApplication()
         {
             var assembly = typeof(ServiceExtension).Assembly;
+
+            // 注册 Mapster 映射配置
+            TypeAdapterConfig.GlobalSettings.Scan(assembly);
+            //忽略null 值
+            TypeAdapterConfig.GlobalSettings.Default.IgnoreNullValues(true);
+
             // 注册 FluentValidation（自动扫描当前程序集的所有 Validator）
             services.AddValidatorsFromAssembly(assembly);
 

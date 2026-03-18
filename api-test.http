@@ -2,8 +2,12 @@
 
 
 ###
-GET {{baseUrl}}/api/test
+PUT {{baseUrl}}/api/cabins/73
+Content-Type: application/json
 
+{
+    "name": "Updated Cabin Name"
+}
 
 
 ### test oada

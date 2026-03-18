@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Oasis.Domain;
 
 
 namespace Oasis.Infrastructure.Persistence;

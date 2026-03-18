@@ -1,6 +1,5 @@
 
 using Microsoft.AspNetCore.Mvc;
-using Oasis.Api.Logging;
 
 namespace Oasis.Api.Middleware;
 

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Oasis.Domain;
 
 namespace Oasis.Infrastructure.Persistence;
 

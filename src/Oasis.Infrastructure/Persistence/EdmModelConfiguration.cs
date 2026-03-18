@@ -1,6 +1,6 @@
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
-using Oasis.Infrastructure.Persistence;
+using Oasis.Domain;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

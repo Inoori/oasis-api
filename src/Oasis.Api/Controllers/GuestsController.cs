@@ -1,42 +1,26 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OData.Query;
-using Microsoft.AspNetCore.OData.Results;
-using Microsoft.AspNetCore.OData.Routing.Controllers;
-using Microsoft.EntityFrameworkCore;
-using Oasis.Infrastructure.Persistence;
+using Oasis.Application.DTOs.GuestDTO;
+using Oasis.Application.Interfaces;
 
 namespace Oasis.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class GuestsController(OasisDbContext dbContext) : ControllerBase
-
+public class GuestsController(IGuestService guestService) : ControllerBase
 {
-    [HttpGet]
-    [Route("odata/guests")]
-    [EnableQuery]
-    public async Task<IActionResult> Get()
-    {
-        return Ok(dbContext.Guests.AsQueryable());
-    }
-
-    [HttpPost]
-    [Route("~/odata/guests/batch")]
-    public async Task<IActionResult> CreateGuests(
-        [FromBody] List<Guest> guests,
+    [HttpPost("upload")]
+    public async Task<IActionResult> UploadGuests(
+        [FromBody] List<CreateGuestRequest> guests,
         CancellationToken cancellationToken)
     {
-        dbContext.Guests.AddRange(guests);
-        await dbContext.SaveChangesAsync(cancellationToken);
-        return Ok();
+        var result = await guestService.UploadGuestsAsync(guests, cancellationToken);
+        return result.IsSuccess ? Ok() : BadRequest(result.Errors);
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteGuests(
-            CancellationToken cancellationToken)
+    public async Task<IActionResult> DeleteAll(CancellationToken cancellationToken)
     {
-        await dbContext.Guests.ExecuteDeleteAsync(cancellationToken);
-        return NoContent();
+        var result = await guestService.DeleteAllGuestsAsync(cancellationToken);
+        return result.IsSuccess ? NoContent() : BadRequest(result.Errors);
     }
-
 }

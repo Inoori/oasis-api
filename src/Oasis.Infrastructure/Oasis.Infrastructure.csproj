@@ -6,14 +6,21 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  
+
   <ItemGroup>
+    <PackageReference Include="FluentResults" />
     <PackageReference Include="Npgsql" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.AspNetCore.OData" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Oasis.Domain\Oasis.Domain.csproj" />
+    <ProjectReference Include="..\Oasis.Application\Oasis.Application.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-namespace Oasis.Infrastructure.Persistence;
+namespace Oasis.Domain;
 
 public class Cabin
 {
