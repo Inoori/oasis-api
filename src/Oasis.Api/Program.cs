@@ -20,7 +20,7 @@ builder.Services.AddProblemDetails();
 // 添加控制器服务并启用 OData支持
 builder.Services.AddControllers().AddODataService();
 
-// 身份认证服务
+// 身份认证服务 
 builder.Services.AddIdentityServices();
 
 builder.Services.AddApiServices()
@@ -31,13 +31,23 @@ builder.Services.AddApiServices()
 var app = builder.Build();
 
 
+//使用全局异常处理中间件
+app.UseMiddleware<ExceptionHandler>();
+
 app.UseHttpLogging();
 
 app.UseHttpsRedirection();
 
 app.UseStatusCodePages();
 
-// app.UseCors();
+app.UseCors(options =>
+{
+    // options.WithOrigins("http://192.168.1.100")
+    // 允许任何来源、方法和头部（根据需要调整）
+    options.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -47,7 +57,5 @@ app.MapControllers();
 
 // app.MapIdentityApi<IdentityUser>();
 
-//使用全局异常处理中间件
-app.UseMiddleware<ExceptionHandler>();
 
 app.Run();

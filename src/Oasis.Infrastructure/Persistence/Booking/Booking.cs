@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Oasis.Infrastructure.Persistence;
 
 public class Booking
@@ -9,12 +11,12 @@ public class Booking
     /// <summary>
     /// 预订的开始日期
     /// </summary>
-    public DateTime? StartDate { get; set; }
+    public DateTimeOffset? StartDate { get; set; }
 
     /// <summary>
     /// 预订的结束日期
     /// </summary>
-    public DateTime? EndDate { get; set; }
+    public DateTimeOffset? EndDate { get; set; }
 
     /// <summary>
     /// 预订的夜晚数
@@ -44,6 +46,7 @@ public class Booking
     /// <summary>
     /// 预订状态（如：已确认、已取消等）
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public BookingStatus Status { get; set; }
 
     /// <summary>

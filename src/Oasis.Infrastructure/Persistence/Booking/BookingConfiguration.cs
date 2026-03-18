@@ -63,12 +63,12 @@ public class BookingConfiguration : IEntityTypeConfiguration<Booking>
         // Relationships
         builder.HasOne(b => b.Cabin)
             .WithMany()
-            .HasForeignKey("cabinID")
+            .HasForeignKey(b => b.CabinId)
             .OnDelete(DeleteBehavior.SetNull);
 
         builder.HasOne(b => b.Guest)
             .WithMany()
-            .HasForeignKey("guestID")
+            .HasForeignKey(b => b.GuestId)
             .OnDelete(DeleteBehavior.SetNull);
     }
 }

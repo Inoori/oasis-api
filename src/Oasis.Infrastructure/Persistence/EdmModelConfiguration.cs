@@ -17,6 +17,8 @@ public static class EdmModelConfiguration
     {
         var builder = new ODataConventionModelBuilder();
         builder.EntitySet<Cabin>("Cabins");  // 注册 Cabins 实体集
+        builder.EntitySet<Guest>("Guests");  // 注册 Guests 实体集
+        builder.EntitySet<Booking>("Bookings");  // 注册 Bookings 实体集
         return builder.GetEdmModel();
     }
 }

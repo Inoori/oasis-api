@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Oasis.Infrastructure.Persistence;
@@ -11,9 +12,11 @@ using Oasis.Infrastructure.Persistence;
 namespace Oasis.Infrastructure.Migrations
 {
     [DbContext(typeof(OasisDbContext))]
-    partial class OasisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260313075637_UpdateBookingDatesToOffset")]
+    partial class UpdateBookingDatesToOffset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -288,13 +291,26 @@ namespace Oasis.Infrastructure.Migrations
                         .HasColumnType("real")
                         .HasColumnName("totalPrice");
 
+                    b.Property<long?>("cabinID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("guestID")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CabinId");
+                    b.HasIndex("cabinID");
 
-                    b.HasIndex("GuestId");
+                    b.HasIndex("guestID");
 
-                    b.ToTable("bookings", (string)null);
+                    b.ToTable("bookings", null, t =>
+                        {
+                            t.Property("cabinID")
+                                .HasColumnName("cabinID1");
+
+                            t.Property("guestID")
+                                .HasColumnName("guestID1");
+                        });
                 });
 
             modelBuilder.Entity("Oasis.Infrastructure.Persistence.Cabin", b =>
@@ -442,12 +458,12 @@ namespace Oasis.Infrastructure.Migrations
                 {
                     b.HasOne("Oasis.Infrastructure.Persistence.Cabin", "Cabin")
                         .WithMany()
-                        .HasForeignKey("CabinId")
+                        .HasForeignKey("cabinID")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Oasis.Infrastructure.Persistence.Guest", "Guest")
                         .WithMany()
-                        .HasForeignKey("GuestId")
+                        .HasForeignKey("guestID")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Cabin");
