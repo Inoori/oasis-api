@@ -6,6 +6,12 @@ using Oasis.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseDefaultServiceProvider(options =>
+{
+    options.ValidateScopes = true;  // 校验作用域捕获问题
+    options.ValidateOnBuild = true; // 构建时校验所有服务能否被创建
+});
+
 
 // 启用端点 API 探索器
 builder.Services.AddEndpointsApiExplorer();
@@ -16,6 +22,7 @@ builder.Services.AddHttpLoggingService();
 // builder.Services.AddSwaggerService();
 
 builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 // 添加控制器服务并启用 OData支持
 builder.Services.AddControllers().AddODataService();
@@ -28,17 +35,15 @@ builder.Services.AddApiServices()
 .AddInfrastructureServices(builder.Configuration);
 
 
+
 var app = builder.Build();
 
 
-//使用全局异常处理中间件
-app.UseMiddleware<ExceptionHandler>();
+app.UseExceptionHandler();
 
 app.UseHttpLogging();
 
 app.UseHttpsRedirection();
-
-app.UseStatusCodePages();
 
 app.UseCors(options =>
 {

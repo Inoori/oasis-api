@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.HttpLogging;
-using Oasis.Api.Middleware;
-using Oasis.Api.Filters;
 using Microsoft.AspNetCore.OData;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -18,8 +16,6 @@ public static partial class ServiceExtension
         /// <returns></returns>
         public IServiceCollection AddApiServices()
         {
-            services.AddScoped<ExceptionHandler>();
-
             //TODO:先不启用
             // services.AddControllers(options =>
             // {
