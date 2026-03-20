@@ -4,11 +4,11 @@ services:
     container_name: postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: oasis # 可改成你想要的用户名
-      POSTGRES_PASSWORD: oasis-9847923 # 强烈建议改成强密码
-      POSTGRES_DB: oasis-db # 默认创建的数据库名，可改
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "5432:5432" # 本地5432端口映射出来（可选）
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql
     healthcheck:
@@ -22,16 +22,11 @@ services:
     container_name: pgweb
     restart: unless-stopped
     ports:
-      - "8081:8081" # pgweb 默认监听 8081 端口
+      - "8081:8081"
     environment:
-      # 推荐使用这种写法（新版本 pgweb 支持 PGWEB_DATABASE_URL）
-      PGWEB_DATABASE_URL: postgres://oasis:oasis-9847923@postgres:5432/oasis-db?sslmode=disable
-      # 或者用旧的写法（DATABASE_URL）也可以：
-      # DATABASE_URL: postgres://oasis:oasis-9847923@postgres:5432/oasis-db?sslmode=disable
+      PGWEB_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable
     depends_on:
       postgres:
-        condition: service_healthy # 等待 postgres 健康检查通过再启动
-    # 可选：如果你想手动在 pgweb 界面输入连接信息，可以去掉 environment 部分
-
+        condition: service_healthy
 volumes:
   postgres_data:
