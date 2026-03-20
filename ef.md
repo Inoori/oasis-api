@@ -1,14 +1,17 @@
-<!-- set connection string -->
-export ConnectionStrings__oasis_db="Host=localhost;Port=5432;Database=oasis-db;Username=oasis;Password=oasis-9847923"
+### CLI commands for setting environment variable for database connection string
+#### bash or zsh
+- export ConnectionStrings__oasis_db="Host=localhost;Port=5432;Database=oasis-db;Username=oasis;Password=oasis-9847923"
 
+#### PowerShell
+- $env:ConnectionStrings__oasis_db="Host=localhost;Port=5432;Database=oasis-db;Username=oasis;Password=oasis-9847923"
 
-<!-- dotnet 生成迁移 -->
-dotnet ef migrations add <MigrationName>  --project src/Oasis.Infrastructure --startup-project src/Oasis.Api
+### CLI commands for EF Core migrations
+#### add migration
+```zsh
+dotnet ef migrations add <MigrationName>  --project Oasis.Infrastructure --startup-project Oasis.Api
+```
 
-
-<!-- dotnet 更新数据库 -->
-dotnet ef database update --project src/Oasis.Infrastructure --startup-project src/Oasis.Api
-
-
-
-dotnet ef migrations add init_table --project src/Oasis.Infrastructure --startup-project src/Oasis.Api
+#### apply migration to database
+```zsh
+dotnet ef database update --project Oasis.Infrastructure --startup-project Oasis.Api
+```
