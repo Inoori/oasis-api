@@ -71,5 +71,13 @@ public class BookingConfiguration : IEntityTypeConfiguration<Booking>
             .WithMany()
             .HasForeignKey(b => b.GuestId)
             .OnDelete(DeleteBehavior.SetNull);
+
+
+        // Indexes
+        builder.HasIndex(b => new { b.Status, b.StartDate })
+            .HasDatabaseName("IX_bookings_status_startdate"); // 按状态过滤 + 按开始日期排序 
+
+        builder.HasIndex(b => new { b.Status, b.TotalPrice })
+            .HasDatabaseName("IX_bookings_status_totalprice"); // 按状态过滤 + 按总价排序
     }
 }

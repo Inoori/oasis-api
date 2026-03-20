@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Oasis.Infrastructure.Persistence;
@@ -11,9 +12,11 @@ using Oasis.Infrastructure.Persistence;
 namespace Oasis.Infrastructure.Migrations
 {
     [DbContext(typeof(OasisDbContext))]
-    partial class OasisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260320102149_Modify cabin RegularPrice, Discount fields to decimal")]
+    partial class ModifycabinRegularPriceDiscountfieldstodecimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,8 +234,8 @@ namespace Oasis.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("cabinID");
 
-                    b.Property<decimal?>("CabinPrice")
-                        .HasColumnType("numeric")
+                    b.Property<float?>("CabinPrice")
+                        .HasColumnType("real")
                         .HasColumnName("cabinPrice");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -245,8 +248,8 @@ namespace Oasis.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("endDate");
 
-                    b.Property<decimal?>("ExtrasPrice")
-                        .HasColumnType("numeric")
+                    b.Property<float?>("ExtrasPrice")
+                        .HasColumnType("real")
                         .HasColumnName("extrasPrice");
 
                     b.Property<long?>("GuestId")
@@ -284,8 +287,8 @@ namespace Oasis.Infrastructure.Migrations
                         .HasDefaultValue(0)
                         .HasColumnName("status");
 
-                    b.Property<decimal?>("TotalPrice")
-                        .HasColumnType("numeric")
+                    b.Property<float?>("TotalPrice")
+                        .HasColumnType("real")
                         .HasColumnName("totalPrice");
 
                     b.HasKey("Id");
@@ -293,12 +296,6 @@ namespace Oasis.Infrastructure.Migrations
                     b.HasIndex("CabinId");
 
                     b.HasIndex("GuestId");
-
-                    b.HasIndex("Status", "StartDate")
-                        .HasDatabaseName("IX_bookings_status_startdate");
-
-                    b.HasIndex("Status", "TotalPrice")
-                        .HasDatabaseName("IX_bookings_status_totalprice");
 
                     b.ToTable("bookings", (string)null);
                 });

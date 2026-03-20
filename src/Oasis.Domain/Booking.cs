@@ -32,17 +32,17 @@ public class Booking
     /// <summary>
     /// 小屋价格
     /// </summary>
-    public float? CabinPrice { get; set; }
+    public decimal? CabinPrice { get; set; }
 
     /// <summary>
     /// 额外服务价格
     /// </summary>
-    public float? ExtrasPrice { get; set; }
+    public decimal? ExtrasPrice { get; set; }
 
     /// <summary>
     /// 总价格
     /// </summary>
-    public float? TotalPrice { get; set; }
+    public decimal? TotalPrice { get; set; }
 
     /// <summary>
     /// 预订状态（如：已确认、已取消等）
