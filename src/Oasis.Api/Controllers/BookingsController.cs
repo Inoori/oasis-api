@@ -1,3 +1,4 @@
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using Oasis.Application.DTOs.BookingDTO;
 using Oasis.Application.Interfaces;
@@ -16,7 +17,7 @@ public class BookingsController(IBookingService bookingService) : ControllerBase
         CancellationToken cancellationToken)
     {
         var result = await bookingService.UploadBookingsAsync(bookings, cancellationToken);
-        return result.IsSuccess ? Ok() : BadRequest(result.Errors);
+        return result.IsSuccess ? Ok() : result.ToActionResult();
     }
 
     [HttpDelete]
@@ -24,7 +25,7 @@ public class BookingsController(IBookingService bookingService) : ControllerBase
             CancellationToken cancellationToken)
     {
         var result = await bookingService.DeleteAllBookingsAsync(cancellationToken);
-        return result.IsSuccess ? Ok() : BadRequest(result.Errors);
+        return result.IsSuccess ? Ok() : result.ToActionResult();
     }
 
 
@@ -32,14 +33,14 @@ public class BookingsController(IBookingService bookingService) : ControllerBase
     public async Task<IActionResult> CheckInBooking(long id, CancellationToken cancellationToken)
     {
         var result = await bookingService.CheckInBookingAsync(id, cancellationToken);
-        return result.IsSuccess ? Ok() : BadRequest(result.Errors);
+        return result.IsSuccess ? Ok() : result.ToActionResult();
     }
 
     [HttpPost("{id}/checkout")]
     public async Task<IActionResult> CheckOutBooking(long id, CancellationToken cancellationToken)
     {
         var result = await bookingService.CheckOutBookingAsync(id, cancellationToken);
-        return result.IsSuccess ? Ok() : BadRequest(result.Errors);
+        return result.IsSuccess ? Ok() : result.ToActionResult();
     }
 
 
@@ -47,6 +48,6 @@ public class BookingsController(IBookingService bookingService) : ControllerBase
     public async Task<IActionResult> UnConfirmBooking(long id, CancellationToken cancellationToken)
     {
         var result = await bookingService.UnConfirmBookingAsync(id, cancellationToken);
-        return result.IsSuccess ? Ok() : BadRequest(result.Errors);
+        return result.IsSuccess ? Ok() : result.ToActionResult();
     }
 }
