@@ -22,3 +22,38 @@ Content-Type: application/json
 GET {{baseUrl}}/odata/cabins?$count=true&$top=2
 Content-Type: application/json
 
+
+
+### user test
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "username": "testuser",
+    "password": ""
+}
+
+
+
+### delete user
+POST {{baseUrl}}/api/auth/delete/0d30f10e-8300-4f9b-acc5-8ef56644fb9a
+
+
+
+
+
+### 上传图片
+POST {{baseUrl}}/api/files/upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="image.jpg"
+Content-Type: image/jpeg
+
+< ./path/to/your/image.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### delete file
+DELETE {{baseUrl}}/api/files/image.jpg

@@ -27,8 +27,6 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 // 添加控制器服务并启用 OData支持
 builder.Services.AddControllers().AddODataService();
 
-// 身份认证服务 
-builder.Services.AddIdentityServices();
 
 builder.Services.AddApiServices()
 .AddApplication()

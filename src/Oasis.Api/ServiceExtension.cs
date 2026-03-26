@@ -58,25 +58,6 @@ public static partial class ServiceExtension
 
             return services;
         }
-
-        /// <summary>
-        ///  添加身份认证服务
-        /// </summary>
-        /// <returns></returns>
-        public IServiceCollection AddIdentityServices()
-        {
-            // 注册 Identity 服务
-            // services.AddIdentityApiEndpoints<IdentityUser>()
-            //     .AddEntityFrameworkStores<Oasis.Infrastructure.Persistence.OasisDbContext>();
-
-            // 配置 Bearer Token 认证
-            services.Configure<BearerTokenOptions>(options =>
-            {
-                options.BearerTokenExpiration = TimeSpan.FromHours(1); // 设置令牌过期时间
-            });
-
-            return services;
-        }
     }
 
 

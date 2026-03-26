@@ -6,6 +6,15 @@
         <!-- 身份认证相关 -->
         <PackageVersion Include="Microsoft.AspNetCore.Identity" Version="2.3.1" />
         <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.1" />
+        <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.5" />
+        <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.17.0" />
+
+        <!-- File Storage -->
+        <PackageVersion Include="AWSSDK.S3" Version="4.0.19.1" />
+        <PackageVersion Include="AWSSDK.Core" Version="4.0.3.21" />
+        <PackageVersion Include="Microsoft.AspNetCore.StaticFiles" Version="2.3.9" />
+
+
         <!-- EF Core 统一 10.0.1 -->
         <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.1" />
         <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.1" />

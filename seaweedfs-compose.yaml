@@ -1,0 +1,86 @@
+services:
+  master:
+    image: chrislusf/seaweedfs:4.17
+    ports:
+      - 9333:9333
+      - 19333:19333
+    command: "master -ip=master -ip.bind=0.0.0.0"
+    volumes:
+      - master_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:9333/cluster/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  volume:
+    image: chrislusf/seaweedfs:4.17
+    ports:
+      - 8080:8080
+      - 18080:18080
+    command: 'volume -ip=volume -master="master:9333" -ip.bind=0.0.0.0 -port=8080'
+    volumes:
+      - volume_data:/data
+    restart: unless-stopped
+    depends_on:
+      master:
+        condition: service_healthy
+
+  filer:
+    image: chrislusf/seaweedfs:4.17
+    ports:
+      - 8888:8888
+      - 18888:18888
+    command: 'filer -ip=filer -master="master:9333" -ip.bind=0.0.0.0'
+    tty: true
+    stdin_open: true
+    volumes:
+      - filer_data:/data
+    restart: unless-stopped
+    depends_on:
+      master:
+        condition: service_healthy
+      volume:
+        condition: service_started
+
+  s3:
+    image: chrislusf/seaweedfs:4.17
+    ports:
+      - 8333:8333
+    command: 's3 -filer="filer:8888" -ip.bind=0.0.0.0'
+    env_file:
+      - .env
+    volumes:
+      - seaweed_data:/data
+    restart: unless-stopped
+    depends_on:
+      master:
+        condition: service_healthy
+      volume:
+        condition: service_started
+      filer:
+        condition: service_started
+
+  webdav:
+    image: chrislusf/seaweedfs:4.17
+    ports:
+      - 7333:7333
+    command: 'webdav -filer="filer:8888"'
+    volumes:
+      - webdav_data:/data
+    restart: unless-stopped
+    depends_on:
+      master:
+        condition: service_healthy
+      volume:
+        condition: service_started
+      filer:
+        condition: service_started
+
+volumes:
+  master_data:
+  volume_data:
+  filer_data:
+  seaweed_data:
+  webdav_data:

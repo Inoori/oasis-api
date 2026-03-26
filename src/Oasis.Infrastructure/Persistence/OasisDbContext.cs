@@ -5,7 +5,7 @@ using Oasis.Domain;
 
 namespace Oasis.Infrastructure.Persistence;
 
-public class OasisDbContext(DbContextOptions<OasisDbContext> options) : IdentityDbContext<IdentityUser>(options)
+public class OasisDbContext(DbContextOptions<OasisDbContext> options) : IdentityDbContext<User>(options)
 {
 
     /// <summary>
