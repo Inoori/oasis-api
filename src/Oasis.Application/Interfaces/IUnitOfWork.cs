@@ -1,4 +1,4 @@
-namespace Oasis.Application.Abstractions.Persistence;
+namespace Oasis.Application.Interfaces;
 
 public interface IUnitOfWork
 {

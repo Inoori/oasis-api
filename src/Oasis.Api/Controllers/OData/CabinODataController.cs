@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Oasis.Infrastructure.Persistence;
 
-namespace Oasis.Api.Controllers;
+namespace Oasis.Api.Controllers.OData;
 
 
 [ApiController]

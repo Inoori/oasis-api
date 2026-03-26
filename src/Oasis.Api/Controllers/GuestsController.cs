@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Oasis.Application.DTOs.GuestDTO;
+using Oasis.Application.DTOs.GuestFeature;
 using Oasis.Application.Interfaces;
 
 namespace Oasis.Api.Controllers;

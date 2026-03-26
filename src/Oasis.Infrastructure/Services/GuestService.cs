@@ -1,6 +1,6 @@
 using Oasis.Application.Interfaces;
 using FluentResults;
-using Oasis.Application.DTOs.GuestDTO;
+using Oasis.Application.DTOs.GuestFeature;
 using Oasis.Domain;
 using Oasis.Infrastructure.Persistence;
 

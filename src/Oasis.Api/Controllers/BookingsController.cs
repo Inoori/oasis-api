@@ -1,6 +1,6 @@
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
-using Oasis.Application.DTOs.BookingDTO;
+using Oasis.Application.DTOs.BookingFeature;
 using Oasis.Application.Interfaces;
 
 namespace Oasis.Api.Controllers;

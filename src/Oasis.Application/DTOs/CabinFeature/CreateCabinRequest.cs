@@ -1,7 +1,7 @@
 using Mapster;
 using Oasis.Domain;
 
-namespace Oasis.Application.DTOs.CabinDto;
+namespace Oasis.Application.DTOs.CabinFeature;
 
 public sealed class CreateCabinRequest : IMapFrom<Cabin>
 {

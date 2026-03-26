@@ -1,5 +1,5 @@
 using FluentResults;
-using Oasis.Application.DTOs.CabinDto;
+using Oasis.Application.DTOs.CabinFeature;
 
 namespace Oasis.Application.Interfaces;
 

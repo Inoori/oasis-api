@@ -1,7 +1,7 @@
 
 
 using FluentResults;
-using Oasis.Application.DTOs.BookingDTO;
+using Oasis.Application.DTOs.BookingFeature;
 
 namespace Oasis.Application.Interfaces;
 

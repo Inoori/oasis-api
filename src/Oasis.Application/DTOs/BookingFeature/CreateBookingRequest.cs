@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Mapster;
 using Oasis.Domain;
 
-namespace Oasis.Application.DTOs.BookingDTO;
+namespace Oasis.Application.DTOs.BookingFeature;
 
 public sealed class CreateBookingRequest : IMapFrom<Booking>
 {

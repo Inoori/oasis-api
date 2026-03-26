@@ -1,5 +1,5 @@
 using FluentResults;
-using Oasis.Application.DTOs.GuestDTO;
+using Oasis.Application.DTOs.GuestFeature;
 
 namespace Oasis.Application.Interfaces;
 

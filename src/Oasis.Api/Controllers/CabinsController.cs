@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
-using Oasis.Application.DTOs.CabinDto;
+using Oasis.Application.DTOs.CabinFeature;
 using Oasis.Application.Interfaces;
 
 namespace Oasis.Api.Controllers;

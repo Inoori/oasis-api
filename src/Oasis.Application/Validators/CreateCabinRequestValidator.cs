@@ -1,6 +1,6 @@
 using FluentValidation;
 using Oasis.Application.DTOs;
-using Oasis.Application.DTOs.CabinDto;
+using Oasis.Application.DTOs.CabinFeature;
 
 namespace Oasis.Application.Validators;
 

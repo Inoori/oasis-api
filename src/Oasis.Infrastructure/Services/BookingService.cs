@@ -2,7 +2,7 @@ using FluentResults;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Oasis.Application.DTOs.BookingDTO;
+using Oasis.Application.DTOs.BookingFeature;
 using Oasis.Application.Interfaces;
 using Oasis.Domain;
 using Oasis.Infrastructure.Persistence;
