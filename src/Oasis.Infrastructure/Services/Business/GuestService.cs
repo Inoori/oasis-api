@@ -4,7 +4,7 @@ using Oasis.Application.DTOs.GuestFeature;
 using Oasis.Domain;
 using Oasis.Infrastructure.Persistence;
 
-namespace Oasis.Infrastructure.Services;
+namespace Oasis.Infrastructure.Services.Business;
 
 
 public class GuestService(OasisDbContext dbContext, IBatchOperationHandler<CreateGuestRequest, Guest> batchAction) : IGuestService

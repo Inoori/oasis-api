@@ -5,7 +5,7 @@ using Oasis.Application.DTOs.IdentityFeature;
 using Oasis.Application.Interfaces;
 using Oasis.Domain;
 
-namespace Oasis.Infrastructure.Services;
+namespace Oasis.Infrastructure.Services.Identity;
 
 /// <summary>
 /// 用户服务实现类，负责处理用户相关的业务逻辑

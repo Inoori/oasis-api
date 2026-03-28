@@ -1,10 +1,9 @@
 using Amazon.S3;
 using Amazon.S3.Model;
-using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Oasis.Application.Interfaces;
 
-namespace Oasis.Infrastructure.Services;
+namespace Oasis.Infrastructure.Services.FileUpload;
 
 
 /// <summary>
@@ -37,6 +36,19 @@ public class FileStorageService(IAmazonS3 s3Client, IConfiguration configuration
 
         await _s3Client.PutObjectAsync(putRequest);
         return fileName;
+    }
+
+
+    /// <summary>
+    /// 使用工厂上传文件，接受一个实现了 IFileUploadRequestFactory 接口的工厂实例，调用工厂的 Build 方法获取一个 FileUploadRequest 对象，然后使用该对象中的信息上传文件，并返回文件键。
+    /// </summary>
+    /// <param name="factory"></param>
+    /// <returns></returns>
+    public async Task<string> UploadFileWithFactoryAsync(IFileUploadRequestFactory factory)
+    {
+        var request = factory.Build();
+        await UploadFileAsync(request.FileStream, request.Key, request.ContentType);
+        return request.Key;
     }
 
     /// <summary>
@@ -93,28 +105,4 @@ public class FileStorageService(IAmazonS3 s3Client, IConfiguration configuration
 
 
 
-
-//todo
-    public async Task UploadImageAsync(Stream fileStream, string fileName)
-    {
-
-        var provider = new FileExtensionContentTypeProvider();
-        if (!provider.TryGetContentType(fileName, out var contentType))
-        {
-            contentType = "application/octet-stream";
-        }
-
-
-
-
-        var putRequest = new PutObjectRequest
-        {
-            BucketName = _bucketName,
-            Key = fileName,
-            InputStream = fileStream,
-            ContentType = contentType
-        };
-
-        await _s3Client.PutObjectAsync(putRequest);
-    }
 }

@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Oasis.Application.DTOs.IdentityFeature;
 using Oasis.Domain;
 
-namespace Oasis.Infrastructure.Services;
+namespace Oasis.Infrastructure.Services.Identity;
 
 
 /// <summary>

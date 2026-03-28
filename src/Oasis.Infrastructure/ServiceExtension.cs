@@ -4,10 +4,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Primitives;
 using Oasis.Application.Interfaces;
 using Oasis.Domain;
 using Oasis.Infrastructure.Persistence;
 using Oasis.Infrastructure.Services;
+using Oasis.Infrastructure.Services.Business;
+using Oasis.Infrastructure.Services.FileUpload;
+using Oasis.Infrastructure.Services.Identity;
 
 namespace Oasis.Infrastructure;
 
@@ -22,6 +26,9 @@ public static partial class ServiceExtension
         /// <returns></returns>
         public IServiceCollection AddInfrastructureServices(IConfiguration configuration)
         {
+
+            // if in high performance scenarios, consider using AddDbContextPool for better performance
+            //https://learn.microsoft.com/en-us/ef/core/performance/advanced-performance-topics?tabs=with-di%2Cexpression-api-with-constant
             services.AddDbContext<OasisDbContext>(options =>
             {
                 //使用 Npgsql 作为数据库提供程序
@@ -32,6 +39,9 @@ public static partial class ServiceExtension
             services.AddIdentity<User, IdentityRole>((options) =>
             {
                 // options.SignIn.RequireConfirmedEmail = true;
+
+                // allow all characters in usernames, including Chinese characters
+                options.User.AllowedUserNameCharacters = null!;
 
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;

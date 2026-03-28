@@ -7,7 +7,7 @@ using Oasis.Application.Interfaces;
 using Oasis.Domain;
 using Oasis.Infrastructure.Persistence;
 
-namespace Oasis.Infrastructure.Services;
+namespace Oasis.Infrastructure.Services.Business;
 
 /// <summary>
 /// Booking service implementation
