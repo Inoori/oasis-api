@@ -24,6 +24,11 @@ public class OasisDbContext(DbContextOptions<OasisDbContext> options) : Identity
     /// </summary>
     public DbSet<Guest> Guests { get; set; }
 
+    /// <summary>
+    /// RefreshTokens DbSet
+    /// </summary>
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
+
 
     /// <summary>
     /// Configure the model

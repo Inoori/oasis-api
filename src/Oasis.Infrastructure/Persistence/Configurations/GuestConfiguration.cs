@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Oasis.Domain;
 
 
-namespace Oasis.Infrastructure.Persistence;
+namespace Oasis.Infrastructure.Persistence.Configurations;
 
 public class GuestConfiguration : IEntityTypeConfiguration<Guest>
 {

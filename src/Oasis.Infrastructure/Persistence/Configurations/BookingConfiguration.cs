@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Oasis.Domain;
 
-namespace Oasis.Infrastructure.Persistence;
+namespace Oasis.Infrastructure.Persistence.Configurations;
 
 public class BookingConfiguration : IEntityTypeConfiguration<Booking>
 {
