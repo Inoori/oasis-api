@@ -1,4 +1,5 @@
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Oasis.Application.DTOs.BookingFeature;
 using Oasis.Application.Interfaces;
@@ -8,6 +9,7 @@ namespace Oasis.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class BookingsController(IBookingService bookingService) : ControllerBase
 {
 

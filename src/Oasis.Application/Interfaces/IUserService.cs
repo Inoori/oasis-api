@@ -22,8 +22,9 @@ public interface IUserService
     /// <returns></returns>
     public Task<Result<AuthResponse>> LoginAsync(LoginRequest loginRequest);
 
+    public Task<Result<AuthResponse>> RefreshTokenAsync(RefreshTokenRequest request);
+    
 
     [Obsolete("Only for testing purposes, not recommended for production use.")]
     public Task<Result> DeleteUserAsync(string userId);
-
 }

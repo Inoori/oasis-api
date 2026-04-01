@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Oasis.Application.DTOs.GuestFeature;
 using Oasis.Application.Interfaces;
@@ -6,6 +7,7 @@ namespace Oasis.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class GuestsController(IGuestService guestService) : ControllerBase
 {
     [HttpPost("upload")]

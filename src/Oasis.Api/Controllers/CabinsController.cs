@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Oasis.Application.DTOs.CabinFeature;
@@ -8,7 +9,7 @@ namespace Oasis.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-// [Authorize]
+[Authorize]
 public class CabinsController(ICabinService cabinService) : ODataController
 {
 

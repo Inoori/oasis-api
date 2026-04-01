@@ -30,9 +30,19 @@ Content-Type: application/json
 
 {
     "email": "test@example.com",
-    "username": "testuser",
-    "password": ""
+    "username": "inori",
+    "password": "test123"
 }
+
+###
+POST {{baseUrl}}/api/auth/refresh
+Content-Type: application/json
+
+{
+    "AccessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMzc4OGY4ZC04ODc5LTQ2NTYtOTZkOC0zMzI3Y2U3MGEyYmEiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJqdGkiOiJjYmYyNmQ3ZC02ZjViLTQ5M2MtODdhOC05ZDE2ZmM4MzM2M2MiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIzNzg4ZjhkLTg4NzktNDY1Ni05NmQ4LTMzMjdjZTcwYTJiYSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJpbm9yaSIsImV4cCI6MTc3NTAzNDAxNywiaXNzIjoib2FzaXMtYXBpIiwiYXVkIjoib2FzaXMtd2ViIn0.XDykWngJsCr8Sm4CGnb-Y47fOr4LiZhx9a-MH2c5EBU",
+    "RefreshToken": "B4I3RSDzkqPJc6TWFE0S7OKTK8tXXBLGFGVUlrobLWOLphSw1EMlp2Ww5B7CYnWD6DKeS9JOLRSIOQCz8XXhlQ=="
+}
+
 
 
 

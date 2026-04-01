@@ -25,7 +25,15 @@ public class AuthController(IUserService userService) : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         var result = await userService.LoginAsync(request);
-        if (result.IsFailed) return Unauthorized(result.Errors);
+        if (result.IsFailed) return result.ToActionResult(StatusCodes.Status401Unauthorized);
+        return Ok(result.Value);
+    }
+
+    [HttpPost("refresh")]
+    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
+    {
+        var result = await userService.RefreshTokenAsync(request);
+        if (result.IsFailed) return result.ToActionResult(StatusCodes.Status401Unauthorized);
         return Ok(result.Value);
     }
 

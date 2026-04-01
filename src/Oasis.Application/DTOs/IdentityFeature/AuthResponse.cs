@@ -1,20 +1,16 @@
 
 namespace Oasis.Application.DTOs.IdentityFeature;
 
-/// <summary>
-/// 认证响应对象
-/// </summary>
-/// <param name="token">JWT 令牌字符串</param>
-/// <param name="expiration">JWT 令牌过期时间</param>
-public class AuthResponse(string token, DateTime expiration)
-{
-    /// <summary>
-    /// JWT 令牌字符串
-    /// </summary>
-    public string Token { get; init; } = token;
 
-    /// <summary>
-    /// JWT 令牌过期时间
-    /// </summary>
-    public DateTime Expiration { get; init; } = expiration;
-}
+/// <summary>
+/// 认证响应 DTO，包含访问令牌、刷新令牌及其过期时间等信息
+/// </summary>
+/// <param name="AccessToken"></param>
+/// <param name="AccessTokenExpiresAtUtc"></param>
+/// <param name="RefreshToken"></param>
+/// <param name="RefreshTokenExpiresAtUtc"></param>
+public record AuthResponse(
+    string AccessToken,
+    DateTime AccessTokenExpiresAtUtc,
+    string RefreshToken,
+    DateTime RefreshTokenExpiresAtUtc);

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
@@ -8,6 +9,7 @@ namespace Oasis.Api.Controllers.OData;
 
 [ApiController]
 [Route("odata/guests")]
+[Authorize]
 public class GuestODataController(OasisDbContext dbContext) : ODataController
 {
     [HttpGet]
