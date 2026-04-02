@@ -30,7 +30,7 @@ builder.Services.AddControllers().AddODataService();
 
 builder.Services.AddApiServices()
 .AddApplication()
-.AddInfrastructureServices(builder.Configuration);
+.AddInfrastructureServices(builder);
 
 
 

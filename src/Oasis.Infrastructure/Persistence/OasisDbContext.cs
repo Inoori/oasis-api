@@ -40,16 +40,4 @@ public class OasisDbContext(DbContextOptions<OasisDbContext> options) : Identity
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(OasisDbContext).Assembly);
     }
 
-    /// <summary>
-    /// Configure the DbContext options
-    /// </summary>
-    /// <param name="optionsBuilder"></param>
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
-
-        optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking) //设置查询跟踪行为 默认不跟踪
-                      .EnableSensitiveDataLogging(); // 启用敏感数据日志记录
-    }
-
 }

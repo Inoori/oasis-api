@@ -62,7 +62,7 @@ public class UserService(UserManager<User> userManager, RoleManager<IdentityRole
     {
         var refreshTokenHash = TokenService.ComputeSha256(request.RefreshToken);
 
-        var storedToken = await db.RefreshTokens.AsTracking().FirstOrDefaultAsync(rt => rt.TokenHash == refreshTokenHash);
+        var storedToken = await db.RefreshTokens.FirstOrDefaultAsync(rt => rt.TokenHash == refreshTokenHash);
 
         if (storedToken is null) return Result.Fail<AuthResponse>("Invalid refresh token");
 
@@ -72,8 +72,8 @@ public class UserService(UserManager<User> userManager, RoleManager<IdentityRole
 
         if (user == null) return Result.Fail<AuthResponse>("User not found");
 
-        // 标记旧 token 为已使用
-        storedToken.UsedAtUtc = DateTime.UtcNow;
+        //删除旧 刷新token
+        await db.RefreshTokens.Where(rt => rt.UserId == user.Id).ExecuteDeleteAsync();
 
         var newRefreshToken = TokenService.CreateRefreshToken();
         var refreshTokenExpiresAtUtc = DateTime.UtcNow.AddDays(_refreshTokenExpiresInDays);
@@ -145,6 +145,10 @@ public class UserService(UserManager<User> userManager, RoleManager<IdentityRole
             ExpiresAtUtc = refreshTokenExpiresAtUtc,
         };
 
+        // 先删除旧的刷新令牌，确保每次登录后只有一个有效的刷新令牌
+        await db.RefreshTokens.Where(rt => rt.UserId == user.Id).ExecuteDeleteAsync();
+
+        // 存储新的刷新令牌
         db.RefreshTokens.Add(refreshEntity);
         await db.SaveChangesAsync();
 

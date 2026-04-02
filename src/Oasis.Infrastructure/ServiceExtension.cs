@@ -1,9 +1,12 @@
 ﻿using Amazon.S3;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Oasis.Application.Interfaces;
 using Oasis.Domain;
@@ -24,16 +27,24 @@ public static partial class ServiceExtension
         /// </summary>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public IServiceCollection AddInfrastructureServices(IConfiguration configuration)
+        public IServiceCollection AddInfrastructureServices(WebApplicationBuilder builder)
         {
+
+            var configuration = builder.Configuration;
+            var isDevelopment = builder.Environment.IsDevelopment();
 
             // if in high performance scenarios, consider using AddDbContextPool for better performance
             //https://learn.microsoft.com/en-us/ef/core/performance/advanced-performance-topics?tabs=with-di%2Cexpression-api-with-constant
-            services.AddDbContext<OasisDbContext>(options =>
+            services.AddDbContextPool<OasisDbContext>(options =>
             {
                 //使用 Npgsql 作为数据库提供程序
                 options.UseNpgsql(configuration.GetConnectionString("oasis_db"),
                     sql => sql.MigrationsAssembly("Oasis.Infrastructure")); // 指定迁移程序集
+
+
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking) // 默认不跟踪查询结果
+                    .EnableDetailedErrors(isDevelopment) // 开发环境显示详细错误
+                    .EnableSensitiveDataLogging(isDevelopment); // 开发环境启用敏感数据日志记录
             });
 
             services.AddIdentity<User, IdentityRole>((options) =>

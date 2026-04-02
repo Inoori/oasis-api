@@ -45,9 +45,18 @@ Content-Type: application/json
 
 
 
+### GET USER
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+
+{
+    "UserId": "23788f8d-8879-4656-96d8-3327ce70a2ba"
+}
+
+
 
 ### delete user
-POST {{baseUrl}}/api/auth/delete/0d30f10e-8300-4f9b-acc5-8ef56644fb9a
+# POST {{baseUrl}}/api/auth/delete/0d30f10e-8300-4f9b-acc5-8ef56644fb9a
 
 
 
