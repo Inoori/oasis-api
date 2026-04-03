@@ -46,14 +46,17 @@ Content-Type: application/json
 
 
 ### GET USER
-POST {{baseUrl}}/api/users
+GET {{baseUrl}}/api/users/23788f8d-8879-4656-96d8-3327ce70a2ba
+
+
+### update profile
+POST {{baseUrl}}/api/users/update-profile
 Content-Type: application/json
 
 {
-    "UserId": "23788f8d-8879-4656-96d8-3327ce70a2ba"
+    "userId": "23788f8d-8879-4656-96d8-3327ce70a2ba",
+    "username": "inori"
 }
-
-
 
 ### delete user
 # POST {{baseUrl}}/api/auth/delete/0d30f10e-8300-4f9b-acc5-8ef56644fb9a
