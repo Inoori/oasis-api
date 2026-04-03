@@ -1,6 +1,8 @@
 ﻿using Amazon.S3;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -65,8 +67,8 @@ public static partial class ServiceExtension
                 .AddEntityFrameworkStores<OasisDbContext>()
                 .AddDefaultTokenProviders();
 
-            // 添加 JWT 认证服务
-            services.AddAuthenticationServices(configuration);
+            // 添加认证服务
+            services.AddAuthenticationServices();
 
             services.AddFileStorageServices(configuration);
 
@@ -82,35 +84,24 @@ public static partial class ServiceExtension
 
 
         /// <summary>
-        /// 注册 JWT 认证服务
+        /// 注册 Cookie 认证服务
         /// </summary>
-        /// <param name="configuration"></param>
         /// <returns></returns>
-        public IServiceCollection AddAuthenticationServices(IConfiguration configuration)
+        public IServiceCollection AddAuthenticationServices()
         {
-            services.AddAuthentication(options =>
-                    {
-                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                    }).AddJwtBearer(options =>
-                    {
-                        string? secretKey = configuration["Jwt:SecretKey"];
-                        ArgumentNullException.ThrowIfNull(secretKey, "JWT secret key is not configured.");
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "oasis.auth";
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.SameSite = SameSiteMode.None;  // 允许跨站点发送
 
-                        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                        {
-                            ValidateIssuer = true,
-                            ValidateAudience = true,
-                            ValidateLifetime = true,
-                            ValidateIssuerSigningKey = true,
-                            ValidIssuer = configuration["Jwt:Issuer"],
-                            ValidAudience = configuration["Jwt:Audience"],
-                            IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretKey))
-                        };
-                    });
+                options.ExpireTimeSpan = TimeSpan.FromDays(7);
+                options.SlidingExpiration = true;             // 用户活跃时自动延长
 
+            });
             // 添加授权服务
-            services.AddAuthorization();
+            // services.AddAuthorization();
             return services;
         }
 

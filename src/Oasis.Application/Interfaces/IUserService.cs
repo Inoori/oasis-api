@@ -12,7 +12,7 @@ public interface IUserService
     /// </summary>
     /// <param name="registerRequest"></param>
     /// <returns></returns>
-    public Task<Result<AuthResponse>> CreateUserAsync(RegisterRequest registerRequest);
+    public Task<Result> RegisterUser(RegisterRequest registerRequest);
 
 
     /// <summary>
@@ -20,10 +20,11 @@ public interface IUserService
     /// </summary>
     /// <param name="loginRequest"></param>
     /// <returns></returns>
-    public Task<Result<AuthResponse>> LoginAsync(LoginRequest loginRequest);
+    public Task<Result> LoginAsync(LoginRequest loginRequest);
 
-    public Task<Result<AuthResponse>> RefreshTokenAsync(RefreshTokenRequest request);
-    
+
+    public Task<Result> LogoutAsync();
+
 
     [Obsolete("Only for testing purposes, not recommended for production use.")]
     public Task<Result> DeleteUserAsync(string userId);

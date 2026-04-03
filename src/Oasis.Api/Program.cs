@@ -32,7 +32,16 @@ builder.Services.AddApiServices()
 .AddApplication()
 .AddInfrastructureServices(builder);
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("oasis-web", policy =>
+    {
+        policy.WithOrigins("https://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
 
 var app = builder.Build();
 
@@ -43,14 +52,7 @@ app.UseHttpLogging();
 
 app.UseHttpsRedirection();
 
-app.UseCors(options =>
-{
-    // options.WithOrigins("http://192.168.1.100")
-    // 允许任何来源、方法和头部（根据需要调整）
-    options.AllowAnyOrigin()
-           .AllowAnyMethod()
-           .AllowAnyHeader();
-});
+app.UseCors("oasis-web");
 
 app.UseAuthentication();
 app.UseAuthorization();

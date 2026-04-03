@@ -14,11 +14,11 @@ public class AuthController(IUserService userService) : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpPost("register")]
-    public async Task<IActionResult> CreateUser([FromBody] RegisterRequest request)
+    public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
-        var result = await userService.CreateUserAsync(request);
+        var result = await userService.RegisterUser(request);
         if (result.IsFailed) return result.ToActionResult();
-        return CreatedAtAction(nameof(CreateUser), result.Value);
+        return Ok();
     }
 
     [HttpPost("login")]
@@ -26,15 +26,15 @@ public class AuthController(IUserService userService) : ControllerBase
     {
         var result = await userService.LoginAsync(request);
         if (result.IsFailed) return result.ToActionResult(StatusCodes.Status401Unauthorized);
-        return Ok(result.Value);
+        return Ok();
     }
 
-    [HttpPost("refresh")]
-    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout()
     {
-        var result = await userService.RefreshTokenAsync(request);
-        if (result.IsFailed) return result.ToActionResult(StatusCodes.Status401Unauthorized);
-        return Ok(result.Value);
+        var result = await userService.LogoutAsync();
+        if (result.IsFailed) return result.ToActionResult(StatusCodes.Status400BadRequest);
+        return Ok();
     }
 
 

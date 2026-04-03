@@ -34,6 +34,17 @@ Content-Type: application/json
     "password": "test123"
 }
 
+
+### 
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "test123@example.com",
+    "username": "inori-new",
+    "password": "test123"
+}
+
 ###
 POST {{baseUrl}}/api/auth/refresh
 Content-Type: application/json

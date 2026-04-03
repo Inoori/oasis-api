@@ -1,32 +1,30 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Oasis.Application.DTOs.UserFeature;
 using Oasis.Domain;
-using Oasis.Infrastructure.Persistence;
 
 namespace Oasis.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-// [Authorize]
+[Authorize]
 public class UsersController(UserManager<User> userManager) : ControllerBase
 {
-    [HttpGet("{userId}")]
-    public async Task<IActionResult> GetUserById(string userId, CancellationToken cancellationToken)
+    [HttpGet("me")]
+    public async Task<IActionResult> GetCurrentUser()
     {
-        var user = await userManager.Users.Select(user => new
-        {
-            user.Id,
-            user.UserName,
-            user.Email,
-            user.Avatar,
-        }).FirstOrDefaultAsync(u => u.Id == userId, cancellationToken);
+        var user = await userManager.GetUserAsync(User);   // User 是 ClaimsPrincipal
 
         if (user is null) return NotFound();
 
-        return Ok(user);
+        return Ok(new
+        {
+            id = user.Id,
+            userName = user.UserName,
+            email = user.Email,
+            avatar = user.Avatar
+        });
     }
 
 
