@@ -50,7 +50,7 @@ docker compose -f seaweedfs-compose.yaml up -d
 
 ```bash
 # PostgreSQL
-export ConnectionStrings__oasis_db="Host=localhost;Port=5432;Database=<db>;Username=<user>;Password=<password>"
+export ConnectionStrings__oasis_db="Host=localhost;Port=5432;Database=oasis-db;Username=oasis;Password=oasis-password"
 
 # JWT
 export Jwt__SecretKey="<your-secret>"
@@ -147,5 +147,5 @@ dotnet test oasis.slnx
 ## 说明
 
 - 当前代码中 Swagger 注册被注释，默认未启用 Swagger UI。
-- 如需启用 Swagger，可在 `Oasis.Api` 中补充 Swagger 相关服务注册与中间件（如 `AddSwaggerGen`、`UseSwagger`、`UseSwaggerUI`），并在 `Program.cs` 中开启对应调用。
+- 如需启用 Swagger，请先在 `src/Oasis.Api/Program.cs` 取消 `AddSwaggerService` 相关注释，并在 `Oasis.Api` 中补充 Swagger 相关服务注册与中间件（如 `AddSwaggerGen`、`UseSwagger`、`UseSwaggerUI`）。
 - 本项目含若干用户密钥与环境变量读取逻辑，建议仅通过本地环境变量或安全配置中心注入，不要将敏感信息提交到仓库。
