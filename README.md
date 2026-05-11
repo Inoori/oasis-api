@@ -147,4 +147,5 @@ dotnet test oasis.slnx
 ## 说明
 
 - 当前代码中 Swagger 注册被注释，默认未启用 Swagger UI。
+- 如需启用 Swagger，可在 `Oasis.Api` 中补充 Swagger 相关服务注册与中间件（如 `AddSwaggerGen`、`UseSwagger`、`UseSwaggerUI`），并在 `Program.cs` 中开启对应调用。
 - 本项目含若干用户密钥与环境变量读取逻辑，建议仅通过本地环境变量或安全配置中心注入，不要将敏感信息提交到仓库。
