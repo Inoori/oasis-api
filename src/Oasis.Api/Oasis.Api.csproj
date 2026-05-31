@@ -4,8 +4,8 @@
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-      <UserSecretsId>da241ab9-0076-4cf8-89f6-e431ebfaeae8</UserSecretsId>
-  </PropertyGroup>
+        <UserSecretsId>da241ab9-0076-4cf8-89f6-e431ebfaeae8</UserSecretsId>
+    </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="FluentValidation" />

@@ -11,6 +11,7 @@
     <PackageReference Include="FluentResults" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="System.Security.Cryptography.Xml" />
   </ItemGroup>
 
 

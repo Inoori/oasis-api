@@ -21,6 +21,7 @@
     <PackageReference Include="AWSSDK.S3" />
     <PackageReference Include="AWSSDK.Core" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" />
+    <PackageReference Include="System.Security.Cryptography.Xml" />
   </ItemGroup>
 
 
